@@ -1,0 +1,17 @@
+<h1>Add a new species below</h1>
+
+<% if @animal.errors.any? %>
+  <h3>Please fix these errors:</h3>
+  <ul>
+    <% @animal.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<form action="/species" method="post">
+  <label for="species-name">Species: </label>
+  <input id="species-name" name="name" type="text">
+  <button>Add Species!</button>
+
+</form>
