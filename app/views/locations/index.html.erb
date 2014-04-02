@@ -1,0 +1,8 @@
+<h1>Here are all of our key locations in the area</h1>
+<ul>
+  <% @locations.each do |location| %>
+    <li> <%= location.name %></li>
+  <% end %>
+</ul>
+
+<p><a href="/species">Go to Species Page</a></p>

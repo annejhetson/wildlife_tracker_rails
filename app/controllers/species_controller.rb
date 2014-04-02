@@ -1,6 +1,6 @@
 class SpeciesController < ApplicationController
   def index
-    @species = Species.all
+    @species = Species.order(:name)
     render('species/index.html.erb')
   end
 
@@ -20,6 +20,7 @@ class SpeciesController < ApplicationController
 
   def show
     @animal = Species.find(params[:id])
+    @sightings = @animal.sightings
     render('species/show.html.erb')
   end
 
@@ -33,7 +34,7 @@ class SpeciesController < ApplicationController
     @species = Species.all
     @animal = Species.find(params[:id])
     @animal.update(:name => params[:name])
-    render('species/index.html.erb')
+    render('species/success.html.erb')
   end
 
   def edit

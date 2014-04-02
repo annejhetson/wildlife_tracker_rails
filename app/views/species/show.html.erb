@@ -1,11 +1,35 @@
 <h1><%= @animal.name %></h1>
 
+<button><a href="<%= @animal.id %>/edit">Edit</a></button>
 <button><a href="/species/<%= @animal.id %>"
         data-confirm="Are you sure?"
         data-method="delete"
         rel="nofollow">Delete</a></button>
+<button><a href="/species">Back to Species</a></button>
 
-<p><a href="<%= @animal.id %>/edit">Edit</a></p>
-<p><a href="/species">Back to Species</a></p>
+<h3>Add a new sighting</h3>
+
+<form action="/species/<%= @animal.id %>" method="post">
+
+  <select name="location_id">
+    <% Location.all.each do |location| %>
+      <option value=<%= location.id %>><%= location.name %></option>
+    <% end %>
+  </select>
+
+  <label for="sighting_date">Date Seen: </label>
+  <input id="sighting_date" name="date_seen" type="date">
+  <button>Add Sighting!</button>
+</form>
+
+<h3>Sightings for <%= @animal.name %></h3>
+  <ul>
+    <% @sightings.order(:location_id).each do |sighting| %>
+      <li>Seen in the <%= sighting.location.name.capitalize %>  region on: <%= sighting.date_seen %></li>
+    <% end %>
+  </ul>
+
+  <%#= select("anything", "location_id", Location.all.collect {|location| location.id}) #%>
+
 
 

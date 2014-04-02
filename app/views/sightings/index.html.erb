@@ -1,0 +1,32 @@
+<h1>What animal have you seen?</h1>
+
+<h3>These are animals we have seen.</h3>
+
+<ul>
+  <% Sighting.all.each do |sight| %>
+    <li> We saw <%= sight.species.name %> in <%= sight.location.name %> region on <%= sight.date_seen %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Seen any animal lately? Report the sighting below!</h4>
+
+<form action="/sightings" method="post">
+
+  <select name="species_id">
+    <% @species.each do |animal| %>
+      <option value=<%= animal.id %>><%= animal.name %></option>
+    <% end %>
+  </select>
+
+  <select name="location_id">
+   <% @locations.each do |location| %>
+     <option value=<%= location.id %>><%= location.name %></option>
+    <% end %>
+  </select>
+
+  <label for="sighting_date">Date Seen: </label>
+  <input id="sighting_date" name="date_seen" type="date">
+
+    <button>Add Sighting!</button>
+</form>
